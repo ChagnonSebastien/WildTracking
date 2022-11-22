@@ -1,0 +1,384 @@
+.TimelineContainer.Extended .MapLock {
+  bottom: calc(80vh + 1rem);
+}
+
+.TimelineContainer {
+  position: absolute;
+  bottom: 0;
+  height: 20vh;
+  width: 100%;
+  transition: height 1s;
+  border-top: .1rem #99a solid;
+  touch-action: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
+}
+
+.TimelineContainer.Extended {
+  height: 80vh;
+}
+
+.Timeline {
+  height: 100%;
+}
+
+.TimelineOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.HeightSubMap {
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.TimelineContainer.Extended .HeightSubMap {
+  opacity: 1;
+}
+
+.TimelineHandle {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  border: 0;
+  background-color: transparent !important;
+}
+
+.arrow {
+  transition: border .1s, transform .1s;
+  border: solid #777;
+  border-width: 0 .5rem .5rem 0;
+  display: inline-block;
+  padding: .8rem;
+}
+
+.arrow:hover {
+  border: solid #555;
+  border-width: 0 .6rem .6rem 0;
+  transform: translateY(-2.05rem) rotate(-135deg);
+  -webkit-transform: translateY(-2.05rem) rotate(-135deg);
+}
+
+.up {
+  transform: translateY(-2rem) rotate(-135deg);
+  -webkit-transform: translateY(-2rem) rotate(-135deg);
+}
+
+.TimelineContainer.Extended .TimelineHandle .arrow {
+  transform: translateY(-3rem) rotate(45deg);
+  -webkit-transform: translateY(-3rem) rotate(45deg);
+}
+
+.MonthLabels {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.MonthLabels div {
+  transition: font-size 1s, padding-bottom 1s;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  overflow: hidden;
+  font-size: calc(2vh * 4 / 5);
+  padding-bottom: 0;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.MonthLabels.Extended div {
+  font-size: calc(8vh * 4 / 10);
+  padding-bottom: calc(8vh * 2 / 10);
+}
+
+.InterfaceInstruction {
+  background-color: white;
+  position: absolute;
+  border: 0.25rem solid #777;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  max-width: min(calc(100% - 6.5rem), 25rem);
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.InterfaceInstruction p {
+  margin-top: 0;
+}
+
+.InterfaceInstruction p:first-child {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.InterfaceInstruction button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #7073b6;
+  font-weight: bold;
+  align-self: end;
+  cursor: pointer;
+}
+
+.Blinking {
+  -moz-transition:all 0.5s ease-in-out;
+  -webkit-transition:all 0.5s ease-in-out;
+  -o-transition:all 0.5s ease-in-out;
+  -ms-transition:all 0.5s ease-in-out;
+  transition:all 0.5s ease-in-out;
+}
+
+.Blinking .MapLock {
+  -moz-animation:blinkMapLock normal .8s infinite ease-in-out;
+  -webkit-animation:blinkMapLock normal .8s infinite ease-in-out;
+  -ms-animation:blinkMapLock normal .8s infinite ease-in-out;
+  animation:blinkMapLock normal .8s infinite ease-in-out;
+}
+
+.Blinking .TimelineHandle .arrow {
+  -moz-animation:blinkTimelineHandle normal .8s infinite ease-in-out;
+  -webkit-animation:blinkTimelineHandle normal .8s infinite ease-in-out;
+  -ms-animation:blinkTimelineHandle normal .8s infinite ease-in-out;
+  animation:blinkTimelineHandle normal .8s infinite ease-in-out;
+}
+
+.TimelineContainer.Extended .Blinking  .TimelineHandle .arrow {
+  -moz-animation:blinkTimelineHandleRotated normal .8s infinite ease-in-out;
+  -webkit-animation:blinkTimelineHandleRotated normal .8s infinite ease-in-out;
+  -ms-animation:blinkTimelineHandleRotated normal .8s infinite ease-in-out;
+  animation:blinkTimelineHandleRotated normal .8s infinite ease-in-out;
+}
+
+.Blinking.Timeline {
+  border-top-color: red;
+
+  -moz-animation:blinkTimeline normal .8s infinite ease-in-out;
+  -webkit-animation:blinkTimeline normal .8s infinite ease-in-out;
+  -ms-animation:blinkTimeline normal .8s infinite ease-in-out;
+  animation:blinkTimeline normal .8s infinite ease-in-out;
+}
+
+
+@keyframes blinkMapLock {
+  0% {
+    background-color: white;
+    border-color: #555;
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(0);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-0.5rem);
+  }
+  50% {
+    transform: scale(1.05, .95) translateY(0);
+    background-color: red;
+    border-color: black;
+  }
+  57% {
+    transform: scale(1, 1) translateY(-0.03rem);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+    background-color: white;
+    border-color: #555;
+  }
+}
+
+@-webkit-keyframes blinkMapLock {
+  0% {
+    background-color: white;
+    border-color: #555;
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(0);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-0.5rem);
+  }
+  50% {
+    transform: scale(1.05, .95) translateY(0);
+    background-color: red;
+    border-color: black;
+  }
+  57% {
+    transform: scale(1, 1) translateY(-0.03rem);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+    background-color: white;
+    border-color: #555;
+  }
+}
+
+@keyframes blinkTimelineHandle {
+  0% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(-2rem) rotate(-135deg);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-2rem) rotate(-135deg);
+  }
+  50% {
+    border-color: red;
+    transform: scale(1.05, .95) translateY(-2rem) rotate(-135deg);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-2.03rem) rotate(-135deg);
+  }
+  64% {
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+  100% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+}
+
+@-webkit-keyframes blinkTimelineHandle {
+  0% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(-2rem) rotate(-135deg);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-2rem) rotate(-135deg);
+  }
+  50% {
+    border-color: red;
+    transform: scale(1.05, .95) translateY(-2rem) rotate(-135deg);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-2.03rem) rotate(-135deg);
+  }
+  64% {
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+  100% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-2rem) rotate(-135deg);
+  }
+}
+
+@keyframes blinkTimelineHandleRotated {
+  0% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(-3rem) rotate(45deg);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-3rem) rotate(45deg);
+  }
+  50% {
+    border-color: red;
+    transform: scale(1.05, .95) translateY(-3rem) rotate(45deg);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-3.03rem) rotate(45deg);
+  }
+  64% {
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+  100% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+}
+
+@-webkit-keyframes blinkTimelineHandleRotated {
+  0% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+  10% {
+    transform: scale(1.1, .9) translateY(-3rem) rotate(45deg);
+  }
+  30% {
+    transform: scale(.9, 1.1) translateY(-3rem) rotate(45deg);
+  }
+  50% {
+    border-color: red;
+    transform: scale(1.05, .95) translateY(-3rem) rotate(45deg);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-3.03rem) rotate(45deg);
+  }
+  64% {
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+  100% {
+    border-color: #555;
+    transform: scale(1, 1) translateY(-3rem) rotate(45deg);
+  }
+}
+
+@keyframes blinkTimeline {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1, .95) translateY(1vh);
+  }
+  30% {
+    transform: scale(1, 1.05) translateY(-1vh);
+  }
+  50% {
+    transform: scale(1, .975) translateY(0.5vh);
+  }
+  57% {
+    transform: scale(1, 1) translateY(0);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+@-webkit-keyframes blinkTimeline {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1, .95) translateY(1vh);
+  }
+  30% {
+    transform: scale(1, 1.05) translateY(-1vh);
+  }
+  50% {
+    transform: scale(1, .975) translateY(0.5vh);
+  }
+  57% {
+    transform: scale(1, 1) translateY(0);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}

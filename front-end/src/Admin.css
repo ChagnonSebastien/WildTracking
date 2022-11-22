@@ -1,0 +1,100 @@
+.Admin {
+    width: 100%;
+    height: 100%;
+    background-color: #d7dede;
+}
+
+.Admin .Container {
+    height: 100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    flex-direction: column-reverse;
+    background-color: white;
+    width: min(100%, 50rem);
+    margin: 0 auto;
+}
+
+.Admin .Controls {
+    display: flex;
+    flex-direction: row-reverse;
+    width: min(20rem, 90%);
+    gap: 1rem;
+    padding: 2rem 7.5rem;
+    border-top: 2px solid #90999b;
+    margin: 0;
+}
+
+.Admin .Controls .Button {
+    background-color: #d1c7f3;
+    border: 0.2rem solid grey;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Admin .Controls>*:first-child {
+    flex-grow: 1;
+}
+
+.Admin .Controls .Button:hover {
+    background-color: #beaff1;
+}
+
+.Admin .Controls .Button:active {
+    background-color: #a590ec;
+}
+
+.Admin .Controls input {
+    display: none;
+}
+
+.Admin .Gallery {
+    flex-grow: 1;
+    align-self: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    overflow-y: scroll;
+    gap: 1rem 1rem;
+    padding: 1rem;
+}
+
+.Admin .Gallery .ImageBox {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Admin .Gallery .ImageBox img {
+    height: min(10rem, 20vw);
+}
+
+.Admin .Gallery .ImageBox .ProgressBar {
+    display: flex;
+    flex-direction: column;
+    height: 0.5rem;
+    background-color: #d1c7f3;
+}
+
+
+
+.Admin .Gallery .ImageBox .Remove {
+    margin: 0.5rem;
+    position: absolute;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 3px;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.Admin .Gallery .ImageBox .Remove:hover {
+    background-color: lightgrey;
+}
+

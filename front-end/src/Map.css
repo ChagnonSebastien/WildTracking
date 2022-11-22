@@ -1,0 +1,17 @@
+.Map {
+    height: 80vh;
+}
+
+.MapLock {
+    transition: bottom 1s;
+    background-color: white;
+    position: absolute;
+    right: 1rem;
+    bottom: calc(20vh + 1rem);
+    border: 0.2rem solid #555;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+}

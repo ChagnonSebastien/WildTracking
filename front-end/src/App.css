@@ -1,0 +1,107 @@
+.Options {
+    transition: all 0.1s;
+    background-color: white;
+    border: 0.2rem solid #555;
+    border-radius: 0.3rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.Options div {
+    border-left: 1px solid black;
+}
+
+.Options div:first-child {
+    border-left: 0;
+}
+
+.Options div:hover {
+    background-color: #EEE;
+}
+
+.Options div:active {
+    background-color: #DDD;
+}
+
+.OptionsPopup {
+    transition: all 0.1s;
+    background-color: white;
+    border: 0.2rem solid #555;
+    border-radius: 0.3rem;
+    position: absolute;
+    top: 4rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0.5rem 1.5rem;
+    max-width: calc(100vw - 5.4rem);
+}
+
+.OptionsPopup *:first-child {
+    align-self: center;
+}
+
+.OptionsPopup h3, h4 {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+}
+
+.Expeditions {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: scroll;
+    flex-direction: column;
+}
+
+.ExpeditionsWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.Card {
+    margin: 0.5rem;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.Card img {
+    max-width: 12rem;
+}
+
+.Card .Text {
+    transition: all 0.1s;
+    border: 0.2rem solid lightgrey;
+    border-left: 0;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 5rem;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: white;
+}
+
+.Card .Text:hover {
+    background-color: #EEE;
+}
+
+.Card .Text:active {
+    background-color: #DDD;
+}
+
+.NoTransition * {
+    transition: none !important;
+}
