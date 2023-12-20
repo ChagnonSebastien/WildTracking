@@ -23,15 +23,15 @@ export const densityIndex = (viewDistance: number, windowWidth: number) => {
 const useTrailLoader = (from: number, to: number) => {
 
   const windowWidth = useWindowWidth();
-  
+
   const language = useContext(LanguageContext);
 
   const { isMapsApiLoaded, firestore } = useGoogleServices();
-  
+
   const [images, setImages] = useState<Image[] | null>(null);
   useEffect(() => {
     if (!isMapsApiLoaded) return;
-    
+
     const imagesRef = collection(firestore, 'images');
     const imagesQuery = query(
       imagesRef,
@@ -39,7 +39,7 @@ const useTrailLoader = (from: number, to: number) => {
       where('timestamp', '>', Timestamp.fromDate(new Date(from))),
       where('timestamp', '<', Timestamp.fromDate(new Date(to)))
     );
-    
+
     getDocs(imagesQuery).then(
       imagesSnapshot => {
         setImages(imagesSnapshot.docs.map<Image>(imageSnapshot => {
@@ -110,7 +110,7 @@ const useTrailLoader = (from: number, to: number) => {
         const distance = lastLocation ? getDistanceFromLatLonInKm(pos, lastLocation) : 0;
         totalLength += distance;
         const isEndOfDay = data.messageType === 'OK';
-        
+
         if (imageIndex < images.length) {
           if (images[imageIndex].timestamp.getTime() < adjustedTime.getTime()) {
             if (images[imageIndex].timestamp.toDateString() === adjustedTime.toDateString()) {
@@ -168,7 +168,7 @@ const useTrailLoader = (from: number, to: number) => {
     });
 
   }, [firestore, from, images, isMapsApiLoaded, to]);
-  
+
   const maxDensityIndex = useMemo(() => {
     return densityIndex(detailedPath?.totalLength ?? 1, windowWidth);
   }, [detailedPath, windowWidth]);

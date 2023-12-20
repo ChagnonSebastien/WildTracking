@@ -19,6 +19,8 @@ root.render(
             <Route path="/">
               <Route index element={<Navigate to="/expeditions" replace />} />
               <Route path="expeditions/:expeditionId/images/:day/:index" element={app} />
+              <Route path="expeditions/:expeditionId/gallery/:index" element={app} />
+              <Route path="expeditions/:expeditionId/gallery" element={app} />
               <Route path="expeditions/:expeditionId" element={app} />
               <Route path="expeditions" element={app} />
               <Route path="admin" element={<Admin />} />

@@ -25,14 +25,14 @@ const browserLanguage = (): SupportedLanguagesType => {
     case SupportedLanguages.English:
       return language;
   }
-  
+
   language = (navigator.language as string).split('-')[0];
   switch (language) {
     case SupportedLanguages.French:
     case SupportedLanguages.English:
       return language;
   }
-  
+
   return 'en';
 };
 
@@ -70,6 +70,8 @@ const english = {
   tut_moveRestriction: 'By default, you can NOT move the map without using the timeline.',
   tut_unbinding: 'However, you can unbind the map to the timeline and move freely using the lock button just below. It can then be clicked again to re-bind.',
   tut_elevation: 'The timeline shows the elevation profile over the days. For finer elevation details, the timeline can be extended and shrank using the arrow just below.',
+  only_images: 'Only the pictures',
+  explore: 'View map',
 } as const;
 
 export type LanguageStrings = {
@@ -109,6 +111,8 @@ const french: LanguageStrings = {
   tut_moveRestriction: 'Par défaut, il n\'est PAS possible de déplacer la carte sans utiliser la ligne du temps.',
   tut_unbinding: 'Cependant, il est possible de délier la carte et la ligne du temps et bouger la carte à votre guise en utilisant le boutton du barrure ci-dessous. Il peut ensuite être re-cliqué pour re-lier',
   tut_elevation: 'La ligne du temps indique le profil d\'élévation au fil des jours. Pour des détails plus fins, la ligne du temps peur être agrandie et rapetissée en utilisant la flèche ci-dessous.',
+  only_images: 'Seulement les photos',
+  explore: 'Voir la carte',
 } as const;
 
 /* eslint-enable */
@@ -131,13 +135,13 @@ export const LanguageContext = createContext<Context>({
 });
 
 const LanguageWrapper = ({ children }: { children: ReactNode }) => {
-  
+
   const [ language, setLanguage ] = useState<SupportedLanguagesType>(browserLanguage());
-  
+
   const monthName = useCallback((i: number) => {
     return getMonthNames(language)[i];
   }, [language]);
-  
+
   const languageSelectionInput = useMemo(() => {
     return (
       <div>
@@ -151,9 +155,9 @@ const LanguageWrapper = ({ children }: { children: ReactNode }) => {
           {' '}
           Francais
         </label>
-  
+
         <br />
-  
+
         <label
           onClick={() => {
             setLanguage(SupportedLanguages.English);
@@ -168,7 +172,7 @@ const LanguageWrapper = ({ children }: { children: ReactNode }) => {
     );
   }, [language]);
 
-  
+
   return (
     <LanguageContext.Provider
       value={{

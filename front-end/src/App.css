@@ -81,25 +81,48 @@
 
 .Card .Text {
     transition: all 0.1s;
-    border: 0.2rem solid lightgrey;
-    border-left: 0;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 5rem;
-    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     flex-grow: 1;
     background-color: white;
 }
 
-.Card .Text:hover {
+.Card .Text .viewMap {
+    border: 0.2rem solid lightgrey;
+    border-left: 0;
+    border-bottom: 0;
+    border-top-right-radius: 0.5rem;
+    padding: 0 2rem;
+    flex-grow: 1;
+    margin: 0;
+}
+
+.Card .Text button {
+    border: 0;
+    padding: 0.5rem 2rem;
+    background-color: #a590ec;
+    overflow: hidden;
+    flex-grow: 0;
+    align-self: stretch;
+    border-bottom-right-radius: 2rem;
+}
+
+.Card .Text .viewMap:hover {
     background-color: #EEE;
 }
 
-.Card .Text:active {
+.Card .Text .viewMap:active {
     background-color: #DDD;
+}
+
+.Card .Text button:hover {
+    background-color: #9176e7;
+}
+
+.Card .Text button:active {
+    background-color: #7754ec;
 }
 
 .NoTransition * {

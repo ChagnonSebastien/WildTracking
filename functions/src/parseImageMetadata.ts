@@ -16,7 +16,7 @@ const retrievePositionData = async (
   const fileName = filePath[filePath.length - 1];
   const fileNameNoExt = fileName.slice(0, fileName.lastIndexOf("."))
   console.log("New image:", fileNameNoExt);
-  
+
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const exifParser = require("exif-parser");
 
@@ -25,17 +25,25 @@ const retrievePositionData = async (
   const lat = tags.GPSLatitude;
   const lng = tags.GPSLongitude;
   const time = tags.DateTimeOriginal;
-  
+
   if (typeof lat === "undefined" || typeof lng === "undefined" || typeof time === "undefined") {
     console.error("Missing EXIF tags", { lat, lng, time });
     return;
   }
-  
+
   const timestamp = new firestore.Timestamp(time, 0);
-  
+
   console.log("Creating Thumbnail from full image");
   const Jimp = require("jimp");
-  const medBuff = await require('sharp')(new Buffer(response.data))
+  let medBuff = await require('sharp')(new Buffer(response.data))
+    .resize({ width: 256, height: 256, fit: 'inside' })
+    .toBuffer();
+
+  console.log(`Saving the smaller to /gallery/${fileNameNoExt}.jpg`)
+  await StorageInstance.bucket().file(`gallery/${fileNameNoExt}.jpg`).save(medBuff);
+
+
+  medBuff = await require('sharp')(new Buffer(response.data))
     .resize({ width: 64, height: 64, fit: 'cover' })
     .png({
       force: true,
@@ -67,10 +75,10 @@ const retrievePositionData = async (
     }
   }
   const buffer = await image.quality(60).getBufferAsync("image/png");
-  
+
   console.log(`Saving the thumbnail to /preview/${fileNameNoExt}.png`)
   await StorageInstance.bucket().file(`preview/${fileNameNoExt}.png`).save(buffer);
-  
+
   console.log("Probing Timezone API");
   const timezoneResponse: TimeZoneResponse = await client.timezone({
     params: {
@@ -81,14 +89,14 @@ const retrievePositionData = async (
     timeout: 1000,
   });
   const {timeZoneId} = timezoneResponse.data;
-  
+
   const imageDocumentData = {
     src: fileNameNoExt,
     pos: new firestore.GeoPoint(lat, lng),
     timestamp,
     timezoneId: timeZoneId,
   }
-  
+
   console.log("Inserting new image in Firestore:", JSON.stringify(imageDocumentData));
   FirestoreInstance.collection("images").doc().create(imageDocumentData)
     .then(() => {

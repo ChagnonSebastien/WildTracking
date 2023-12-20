@@ -6,15 +6,17 @@ import Expedition from './Expedition';
 import Loading from './Loading';
 
 import './App.css';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { LanguageContext } from './useLanguage';
 import useOptions, { OptionsContext } from './useOptions';
+import Gallery from './Gallery';
 
 const App = () => {
   const { firestore } = useGoogleServices();
 
   const navigate = useNavigate();
   const { expeditionId } = useParams<{ expeditionId: string }>();
+  const location = useLocation();
 
   const [expeditions, setExpeditions] = useState<Expedition[] | null>(null);
   const { text } = useContext(LanguageContext);
@@ -46,27 +48,29 @@ const App = () => {
       <div
         key={`ExpeditionTile-${expedition.id}`}
         className="Card"
-        onClick={() => navigate(`${expedition.id}`)}
       >
-        <img src={expedition.image} alt={expedition.name} />
+        <img
+          src={expedition.image}
+          alt={expedition.name}
+          onClick={() => navigate(`${expedition.id}`)}
+        />
 
-        <div
-          className="Text"
-          style={{
-            padding: '1rem 2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexGrow: 1,
-          }}
-        >
-          <h3>{expedition.name}</h3>
-          <p>{expedition.description}</p>
+        <div className="Text">
+          <div className="viewMap" onClick={() => navigate(`${expedition.id}`)}>
+            <h3>{expedition.name}</h3>
+
+            <p>
+              {text.explore}
+            </p>
+          </div>
+
+          <button onClick={() => navigate(`${expedition.id}/gallery`)}>
+            {text.only_images}
+          </button>
         </div>
       </div>
     ));
-  }, [expeditions, navigate]);
+  }, [expeditions, navigate, text.explore, text.only_images]);
 
   const currentExpedition = useMemo(
     () => expeditions?.find(e => e.id === expeditionId),
@@ -91,6 +95,13 @@ const App = () => {
             </div>
           </div>
         );
+  }
+  else if (location.pathname.includes('gallery')) {
+    contents = (
+      <Gallery expedition={currentExpedition} className={options.noSmoothMovement ? 'NoTransition' : undefined}>
+        {menu}
+      </Gallery>
+    );
   }
   else {
     contents = (
